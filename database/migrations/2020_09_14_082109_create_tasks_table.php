@@ -16,10 +16,14 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             
+            $table->unsignedBigInteger('parent_id')->default(0);
+            
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
 
             $table->string('name');
+            $table->text('description')->nullable();
+            
            
             $table->timestamps();
             $table->softDeletes();
